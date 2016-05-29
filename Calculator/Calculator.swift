@@ -20,6 +20,8 @@ class Calculator: UIViewController {
     var resultTwo: Float!
     var resultOnScreen = false
     
+    //GIT TEST TEXT FOR COMMIT
+    
     @IBAction func clearScreen(sender: UIButton) {
         
         screen.text = "0"
