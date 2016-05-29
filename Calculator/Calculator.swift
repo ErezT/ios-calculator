@@ -19,7 +19,7 @@ class Calculator: UIViewController {
     var result: Float!
     var resultTwo: Float!
     var resultOnScreen = false
-        
+    
     @IBAction func clearScreen(sender: UIButton) {
         
         screen.text = "0"
