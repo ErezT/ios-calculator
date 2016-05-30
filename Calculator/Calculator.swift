@@ -16,9 +16,10 @@ class Calculator: UIViewController {
     var numberOne = "0"
     var numberTwo = "0"
     var mathSign = ""
-    var result: Float!
-    var resultTwo: Float!
+    var result: Double!
+    var resultTwo: Double!
     var resultOnScreen = false
+    var numberOnScreen = false
     
     @IBAction func clearScreen(sender: UIButton) {
         
@@ -28,6 +29,7 @@ class Calculator: UIViewController {
         numberTwo = "0"
         resultTwo = 0
         resultOnScreen = false
+        numberOnScreen = false
     }
     
     @IBAction func makeResult(sender: UIButton) {
@@ -48,12 +50,12 @@ class Calculator: UIViewController {
             smallScreen.text = smallScreen.text! + " = " + String(result)
         case "/":
             result = dividing(numberOne, numTwo: numberTwo)
-            let divResult = Float((1000 * result)/1000)
+            let divResult = Double((1000 * result)/1000)
             screen.text = String(divResult)
             smallScreen.text = smallScreen.text! + " = " + String(divResult)
         case "mod":
             result = modOper(numberOne, numTwo: numberTwo)
-            let divResult = Float((1000 * result)/1000)
+            let divResult = Double((1000 * result)/1000)
             screen.text = String(divResult)
             smallScreen.text = smallScreen.text! + " = " + String(divResult)
         case "x^2":
@@ -73,7 +75,13 @@ class Calculator: UIViewController {
     
     @IBAction func mathButton(sender: UIButton) {
 
-        
+        if numberOnScreen == true {
+            numberOne = screen.text!
+            mathSign = sender.currentTitle!
+            screen.text = mathSign
+            numberOnScreen = false
+            smallScreen.text = smallScreen.text! + mathSign
+        }
         
         if resultOnScreen == true{
             numberOne = String(result)
@@ -81,24 +89,28 @@ class Calculator: UIViewController {
             resultOnScreen = false
         }
         
+
         
-        numberOne = screen.text!
-        mathSign = sender.currentTitle!
-        screen.text = mathSign
-        //smallScreen.text = mathSign
         
-        smallScreen.text = smallScreen.text! + mathSign
+//        numberOne = screen.text!
+//        mathSign = sender.currentTitle!
+//        screen.text = mathSign
+//        //smallScreen.text = mathSign
+//        
+//        smallScreen.text = smallScreen.text! + mathSign
 
     
     }
 
     @IBAction func pressDigit(sender: UIButton) {
         let digit = sender.currentTitle!
+        numberOnScreen = true
+        
         if resultOnScreen
         {
             screen.text = digit
             resultTwo = result
-            result = Float(numberOne)
+            result = Double(numberOne)
             
         }
         else{
@@ -121,49 +133,49 @@ class Calculator: UIViewController {
     }
     
 
-    func adding(numOne: String, numTwo: String) -> Float {
-        let firstNum = Float(numOne)!
-        let secondNum = Float(numTwo)!
+    func adding(numOne: String, numTwo: String) -> Double {
+        let firstNum = Double(numOne)!
+        let secondNum = Double(numTwo)!
         
         return firstNum + secondNum
     }
     
-    func subtracting(numOne: String, numTwo: String) -> Float {
-        let firstNum = Float(numOne)!
-        let secondNum = Float(numTwo)!
+    func subtracting(numOne: String, numTwo: String) -> Double {
+        let firstNum = Double(numOne)!
+        let secondNum = Double(numTwo)!
         
         return firstNum - secondNum
     }
     
-    func multiplying(numOne: String, numTwo: String) -> Float {
-        let firstNum = Float(numOne)!
-        let secondNum = Float(numTwo)!
+    func multiplying(numOne: String, numTwo: String) -> Double {
+        let firstNum = Double(numOne)!
+        let secondNum = Double(numTwo)!
         
         return firstNum * secondNum
     }
     
-    func dividing(numOne: String, numTwo: String) -> Float {
-        let firstNum = Float(numOne)!
-        let secondNum = Float(numTwo)!
+    func dividing(numOne: String, numTwo: String) -> Double {
+        let firstNum = Double(numOne)!
+        let secondNum = Double(numTwo)!
         
         return firstNum / secondNum
     }
     
-    func modOper(numOne: String, numTwo: String) -> Float {
-        let firstNum = Float(numOne)!
-        let secondNum = Float(numTwo)!
+    func modOper(numOne: String, numTwo: String) -> Double {
+        let firstNum = Double(numOne)!
+        let secondNum = Double(numTwo)!
         
         return firstNum % secondNum
     }
     
-    func powerOf(numOne: String) -> Float {
-        let firstNum = Float(numOne)!
+    func powerOf(numOne: String) -> Double {
+        let firstNum = Double(numOne)!
         return firstNum * firstNum
     }
     
-    func sqrtOf(numOne: String) -> Float {
-        let firstNum = Float(numOne)!
-        return sqrtf(firstNum)
+    func sqrtOf(numOne: String) -> Double {
+        let firstNum = Double(numOne)!
+        return sqrt(firstNum)
     }
 
 }
