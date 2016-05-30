@@ -128,8 +128,6 @@ class Calculator: UIViewController {
                 smallScreen.text = smallScreen.text! + " " + digit
             }
         }
-        
-        
     }
     
 
